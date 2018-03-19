@@ -12,30 +12,48 @@ CHANNEL_NAME=mychannel
 rm -fr config/*
 rm -fr crypto-config/*
 
-# generate crypto material
 cryptogen generate --config=./crypto-config.yaml
 if [ "$?" -ne 0 ]; then
-  echo "Failed to generate crypto material..."
+  echo "Failed to generate certificates..."
   exit 1
 fi
+echo
 
-# generate genesis block for orderer
-configtxgen -profile OneOrgOrdererGenesis -outputBlock ./config/genesis.block
-if [ "$?" -ne 0 ]; then
-  echo "Failed to generate orderer genesis block..."
-  exit 1
-fi
+  echo "#########  Generating Orderer Genesis block ##############"
 
-# generate channel configuration transaction
-configtxgen -profile OneOrgChannel -outputCreateChannelTx ./config/channel.tx -channelID $CHANNEL_NAME
-if [ "$?" -ne 0 ]; then
-  echo "Failed to generate channel configuration transaction..."
-  exit 1
-fi
+  configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+  if [ "$?" -ne 0 ]; then
+    echo "Failed to generate orderer genesis block..."
+    exit 1
+  fi
+  echo
 
-# generate anchor peer transaction
-configtxgen -profile OneOrgChannel -outputAnchorPeersUpdate ./config/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
-if [ "$?" -ne 0 ]; then
-  echo "Failed to generate anchor peer update for Org1MSP..."
-  exit 1
-fi
+
+  echo "### Generating channel configuration transaction 'channel.tx' ###"
+  configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+  if [ "$?" -ne 0 ]; then
+    echo "Failed to generate channel configuration transaction..."
+    exit 1
+  fi
+
+  echo
+  echo "#######    Generating anchor peer update for Org1MSP   ##########"
+  configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+  if [ "$?" -ne 0 ]; then
+    echo "Failed to generate anchor peer update for Org1MSP..."
+    exit 1
+  fi
+
+  echo
+  echo "#######    Generating anchor peer update for Org2MSP   ##########"
+  configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate \
+  ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
+  if [ "$?" -ne 0 ]; then
+    echo "Failed to generate anchor peer update for Org2MSP..."
+    exit 1
+  fi
+  echo
+
+
+
+
