@@ -9,7 +9,7 @@ set -ev
 
 # Shut down the Docker containers that might be currently running.
 docker-compose -f docker-compose.yml stop
-sleep 5
+sleep 3
 docker rm -f $(docker ps -aq)
-sleep 5
+sleep 3
 ./teardown.sh
