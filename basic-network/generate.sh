@@ -1,9 +1,4 @@
 #!/bin/sh
-#
-# Copyright IBM Corp All Rights Reserved
-#
-# SPDX-License-Identifier: Apache-2.0
-#
 export PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:${PWD}/../bin:${PWD}:$PATH
 export FABRIC_CFG_PATH=${PWD}
 CHANNEL_NAME=mychannel
@@ -19,41 +14,37 @@ if [ "$?" -ne 0 ]; then
 fi
 echo
 
-  echo "#########  Generating Orderer Genesis block ##############"
+echo "==========  Generating Orderer Genesis block =========="
 
-  configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
-  if [ "$?" -ne 0 ]; then
-    echo "Failed to generate orderer genesis block..."
-    exit 1
-  fi
-  echo
-
-
-  echo "### Generating channel configuration transaction 'channel.tx' ###"
-  configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
-  if [ "$?" -ne 0 ]; then
-    echo "Failed to generate channel configuration transaction..."
-    exit 1
-  fi
-
-  echo
-  echo "#######    Generating anchor peer update for Org1MSP   ##########"
-  configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
-  if [ "$?" -ne 0 ]; then
-    echo "Failed to generate anchor peer update for Org1MSP..."
-    exit 1
-  fi
-
-  echo
-  echo "#######    Generating anchor peer update for Org2MSP   ##########"
-  configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate \
-  ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
-  if [ "$?" -ne 0 ]; then
-    echo "Failed to generate anchor peer update for Org2MSP..."
-    exit 1
-  fi
-  echo
+configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+if [ "$?" -ne 0 ]; then
+  echo "Failed to generate orderer genesis block..."
+  exit 1
+fi
+echo
 
 
+echo "========== Generating channel configuration transaction 'channel.tx' =========="
+configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+if [ "$?" -ne 0 ]; then
+  echo "Failed to generate channel configuration transaction..."
+  exit 1
+fi
 
+echo
+echo "========== Generating anchor peer update for Org1MSP =========="
+configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+if [ "$?" -ne 0 ]; then
+  echo "Failed to generate anchor peer update for Org1MSP..."
+  exit 1
+fi
 
+echo
+echo "========== Generating anchor peer update for Org2MSP =========="
+configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate \
+./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
+if [ "$?" -ne 0 ]; then
+  echo "Failed to generate anchor peer update for Org2MSP..."
+  exit 1
+fi
+echo
