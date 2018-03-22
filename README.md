@@ -1,21 +1,22 @@
 # decentralised-ecosystem-prototype
-decentralised-ecosystem-prototype that leverages ipfs and hyperledger fabric
 
-Prerequisites:
-Have configtxgen and cryptogen in $PATH
+<body>
 
-To start:
-  Navigate to javascript folder
-    Run commands:
-      startFabric.sh
-      npm install
+<h1>Prerequisites</h1>
+<p>Have configtxgen and cryptogen in $PATH</p>
+<p>Navigate to the /basic-network folder with CLI</p>
 
-To exit:
-  Navigate to basic network folder: 
-    Run commands:
-      ./stop.sh
-      ./teardown.sh
-      docker rm -f $(docker ps -aq)
-      docker network prune
-      docker rmi dev-peer0.org1.example.com-fabcar-1.0-5c906e402ed29f20260ae42283216aa75549c571e2e380f3615826365d8269ba
-     
+<h1>To start</h1>
+  <p>Run commands:</p>
+    <ul>
+        <li>./generate.sh</li>
+        <li>./start.sh</li>
+    </ul>
+   <p>This spins up the distributed ledger and installs a chaincode contract</p>
+<h1>To exit</h1>
+  <p>Run commands:</p>
+    <ul>
+        <li>./teardown.sh</li>
+    </ul>
+</body>
+
