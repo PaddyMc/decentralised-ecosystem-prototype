@@ -4,5 +4,5 @@ for f in "$dir"*_sk; do
 done
 cd ../../../../
 
-sed -i -e "s/\/etc\/hyperledger\/fabric-ca-server-config\/.*_sk/\/etc\/hyperledger\/fabric-ca-server-config\/$FILE/g" ./docker-compose.yml
+sed -i -e "s/--ca.keyfile \/etc\/hyperledger\/fabric-ca-server-config\/.*_sk/--ca.keyfile \/etc\/hyperledger\/fabric-ca-server-config\/$FILE/g" ./docker-compose.yml
 # sed -i -e "s/certificatePlaceHolder/$FILE/g" ./docker-compose.yml
