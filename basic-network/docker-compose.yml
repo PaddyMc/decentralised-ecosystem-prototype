@@ -16,7 +16,7 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca.example.com
     ports:
       - "7054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/70a125555cef6e055ea551e9f44bd2027b914b264f388ab7d3afae72a6bc1f50_sk -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/69d2b713f784f73c42ca1a3c36eb6c0b7eb0a244bafde70ffb653a3648f01de0_sk -b admin:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.example.com
@@ -45,7 +45,9 @@ services:
     - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
     - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/orderer/msp
     - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/:/etc/hyperledger/msp/peerOrg1
+    - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/:/etc/hyperledger/msp/peerOrg11
     - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/:/etc/hyperledger/msp/peerOrg2
+    - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/:/etc/hyperledger/msp/peerOrg22
     ports:
       - 7050:7050
     networks:
@@ -208,7 +210,7 @@ services:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp:/etc/hyperledger/msp/peer
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls:/etc/hyperledger/fabric/tls
-        #- ./crypto-config/peerOrganizations/org2.example.com/users:/etc/hyperledger/msp/users
+        - ./crypto-config/peerOrganizations/org2.example.com/users:/etc/hyperledger/msp/users
 #        - ./config:/etc/hyperledger/configtx
     depends_on:
       - orderer.example.com

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ev
+set -e
 
 CORE_PEER_ADDRESS=peer0.org2.example.com:7051
 CORE_PEER_LOCALMSPID=Org2MSP
