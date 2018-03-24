@@ -14,13 +14,13 @@ docker cp peer-setup-scripts/peer0org1Setup.sh peer0.org1.example.com:/opt/gopat
 docker exec peer0.org1.example.com /opt/gopath/src/github.com/hyperledger/fabric/peer0org1Setup.sh
 sleep 3
 docker cp peer0.org1.example.com:/opt/gopath/src/github.com/hyperledger/fabric/mychannel.block .
-#
-# echo
-# echo "========== Starting peer 1 org 1 =========="
-# docker cp mychannel.block peer1.org1.example.com:/opt/gopath/src/github.com/hyperledger/fabric/
-# docker cp peer-setup-scripts/peer1org1Setup.sh cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/peer1org1Setup.sh
-# docker exec cli /opt/gopath/src/github.com/hyperledger/fabric/peer/peer1org1Setup.sh
-# sleep 3
+
+echo
+echo "========== Starting peer 1 org 1 =========="
+docker cp mychannel.block peer1.org1.example.com:/opt/gopath/src/github.com/hyperledger/fabric/
+docker cp peer-setup-scripts/peer1org1Setup.sh peer1.org1.example.com:/opt/gopath/src/github.com/hyperledger/fabric/peer1org1Setup.sh
+docker exec peer1.org1.example.com /opt/gopath/src/github.com/hyperledger/fabric/peer1org1Setup.sh
+sleep 3
 
 
 echo
@@ -31,12 +31,12 @@ docker exec peer0.org2.example.com /opt/gopath/src/github.com/hyperledger/fabric
 sleep 3
 
 
-# echo
-# echo "========== Starting peer 1 org 2 =========="
-# docker cp mychannel.block peer1.org2.example.com:/opt/gopath/src/github.com/hyperledger/fabric/
-# docker cp peer-setup-scripts/peer1org2Setup.sh cli:/opt/gopath/src/github.com/hyperledger/fabric/peer/peer1org2Setup.sh
-# docker exec cli /opt/gopath/src/github.com/hyperledger/fabric/peer/peer1org2Setup.sh
-# sleep 3
+echo
+echo "========== Starting peer 1 org 2 =========="
+docker cp mychannel.block peer1.org2.example.com:/opt/gopath/src/github.com/hyperledger/fabric/
+docker cp peer-setup-scripts/peer1org2Setup.sh peer1.org2.example.com:/opt/gopath/src/github.com/hyperledger/fabric/peer1org2Setup.sh
+docker exec peer1.org2.example.com /opt/gopath/src/github.com/hyperledger/fabric/peer1org2Setup.sh
+sleep 3
 
 echo
 echo "========== Starting cli =========="
