@@ -9,7 +9,6 @@
 <h1>To start</h1>
   <p>Run commands:</p>
     <ul>
-        <li>./generate.sh</li>
         <li>./start.sh</li>
     </ul>
    <p>This spins up the distributed ledger and installs a chaincode contract</p>
