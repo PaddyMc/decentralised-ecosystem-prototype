@@ -11,7 +11,7 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca.example.com
     ports:
       - "7054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/70d46f37da845465ad7f87c1d63ce9027f0bdf01f60e8c968e4d0651afd5389b_sk -b user1:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/366db68def4ef058fead74722933086cb5ef8b29561d2fe0218903d01ddd0b0e_sk -b user1:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.example.com
