@@ -3,4 +3,6 @@ module.exports = function(app){
     app.get('/people', people.find);
     app.get('/people/:query', people.findByQuery);
     app.post('/people', people.add);
+    // app.get('/enrollAdmin', people.enrollAdmin);
+    // app.get('/registerUser', people.registerUser);
 }
