@@ -11,7 +11,7 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca.example.com
     ports:
       - "7054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/366db68def4ef058fead74722933086cb5ef8b29561d2fe0218903d01ddd0b0e_sk -b user1:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/2f0c0f4c44a4290d0e25dbf5ca591f29cc28aef5e0f7c4dd1712a170b3fb6f3a_sk -b user1:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.example.com
@@ -240,7 +240,7 @@ services:
         - ./../chaincode/:/opt/gopath/src/github.com/
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
-        - ./peer-setup-scripts/cliSetup.sh:/opt/gopath/src/github.com/hyperledger/fabric/peer/cliSetup.sh
+        - ./peer-setup-scripts/cliSetup.sh:/opt/gopath/src/github.com/hyperledger/fabric/peer/setup.sh
     networks:
         - basic
     depends_on:

@@ -5,7 +5,7 @@ initIPFS(){
 		docker exec "$i" ipfs init
 		docker exec "$i" ipfs config LIBP2P_FORCE_PNET 1
 		docker exec "$i" ipfs bootstrap rm --all
-		docker exec "$i" cp /go-ipfs/swarm.key ~/.ipfs
+		docker exec "$i" cp /go-ipfs/swarm.key /root/.ipfs
 	done
 }
 
@@ -28,7 +28,9 @@ initializeSwarm(){
 
 uploadBlock(){
 	BLOCK_HASH=$(docker exec "$1" ipfs add "$2")
-	echo "$BLOCK_HASH" | grep -o -P '(?<=added ).*(?=mychannel.block)'	
+	# echo "$BLOCK_HASH"  | grep -o -p '(?<=added).*(?=mychannel.*)'
+	echo "$BLOCK_HASH"  | sed -e 's/added \(.*\) mychannel.*/\1/'
+	
 }
 
 copyBlockToPeers(){
@@ -54,6 +56,7 @@ initializeSwarm
 sleep 1
 
 BLOCK_HASH=$(uploadBlock peer0.org1.example.com mychannel.block)
+echo "$BLOCK_HASH"
 copyBlockToPeers $BLOCK_HASH mychannel.block
 
 
