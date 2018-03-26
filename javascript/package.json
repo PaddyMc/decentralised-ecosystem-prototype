@@ -8,15 +8,14 @@
     },
     "dependencies": {
         "fabric-ca-client": "^1.0.1",
-        "fabric-client": "^1.0.1"
+        "fabric-client": "^1.0.1",
+        "express": "3.x"
     },
-    "author": "Anthony O'Dowd",
+    "author": "Patches & Cael",
     "license": "Apache-2.0",
     "keywords": [
         "Hyperledger",
         "Fabric",
-        "Car",
-        "Sample",
         "Application"
     ]
 }
