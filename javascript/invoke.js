@@ -1,10 +1,5 @@
 'use strict';
 /*
-* Copyright IBM Corp All Rights Reserved
-*
-* SPDX-License-Identifier: Apache-2.0
-*/
-/*
  * Chaincode Invoke
  */
 
@@ -13,7 +8,6 @@ var path = require('path');
 var util = require('util');
 var os = require('os');
 
-//
 var fabric_client = new Fabric_Client();
 
 // setup the fabric network
@@ -22,18 +16,6 @@ var peer = fabric_client.newPeer('grpc://localhost:7051');
 channel.addPeer(peer);
 var order = fabric_client.newOrderer('grpc://localhost:7050')
 channel.addOrderer(order);
-
-function imageAsText(){
-	var fs = require('fs')
-	fs.readFileSync('./tempImage.txt', 'utf8', function (err,data) {
-		if (err) {
-			return console.log(err);
-		}
-		// console.log(data)
-		// return data.toString();
-		//console.log(imageAsText);
-	});
-}
 
 var fs = require('fs');
 function myfun(filePath){
@@ -86,9 +68,6 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
   // file.close();
   // console.log(str);
 var image = myfun('./tempImage.txt');
-console.log(image);
-
-var test = "teeeeesssssttttt"
 var request = {
 	//targets: let default to the peer assigned to the client
 	chaincodeId: 'fabcar',
