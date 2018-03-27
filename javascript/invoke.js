@@ -57,35 +57,17 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	// createCar chaincode function - requires 5 args, ex: args: ['CAR12', 'Honda', 'Accord', 'Black', 'Tom'],
 	// changeCarOwner chaincode function - requires 2 args , ex: args: ['CAR10', 'Dave'],
 	// must send the proposal to endorsing peers
-  // var txtFile = "tempImage.txt";
-  // var file = new File(txtFile);
-  // file.open("r"); // open file with read access
-  // var str = "";
-  // while (!file.eof) {
-  // 	// read each line of text
-  // 	str += file.readln() + "\n";
-  // }
-  // file.close();
-  // console.log(str);
-var image = myfun('./tempImage.txt');
-var request = {
-	//targets: let default to the peer assigned to the client
-	chaincodeId: 'fabcar',
-	fcn: 'changeCarOwner',
-	args: ['CAR10', image],
-	chainId: 'mychannel',
-	txId: tx_id
-};
-return channel.sendTransactionProposal(request);
-console.log(imageAsText)
-	var request = {
-		//targets: let default to the peer assigned to the client
-		chaincodeId: 'fabcar',
-		fcn: 'changeCarOwner',
-		args: ['CAR10', imageAsText],
-		chainId: 'mychannel',
-		txId: tx_id
-	};
+
+  var image = myfun('./tempImage.txt');
+  var request = {
+  	//targets: let default to the peer assigned to the client
+  	chaincodeId: 'fabcar',
+  	fcn: 'changeCarOwner',
+  	args: ['CAR11', 'aaaaaaaaa'],
+  	chainId: 'mychannel',
+  	txId: tx_id
+  };
+  return channel.sendTransactionProposal(request);
 
 	// send the transaction proposal to the peers
 	// return channel.sendTransactionProposal(request);
