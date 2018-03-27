@@ -44,16 +44,16 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 
     // at this point we should have the admin user
     // first need to register the user with the CA server
-    return fabric_ca_client.register({enrollmentID: 'user2', affiliation: 'org1.department1',role: 'client'}, admin_user);
+    return fabric_ca_client.register({enrollmentID: 'user1', affiliation: 'org1.department1',role: 'client'}, admin_user);
 }).then((secret) => {
     // next we need to enroll the user with CA server
     console.log('Successfully registered user1 - secret:'+ secret);
 
-    return fabric_ca_client.enroll({enrollmentID: 'user2', enrollmentSecret: secret});
+    return fabric_ca_client.enroll({enrollmentID: 'user1', enrollmentSecret: secret});
 }).then((enrollment) => {
   console.log('Successfully enrolled member user "user1" ');
   return fabric_client.createUser(
-     {username: 'user2',
+     {username: 'user1',
      mspid: 'Org1MSP',
      cryptoContent: { privateKeyPEM: enrollment.key.toBytes(), signedCertPEM: enrollment.certificate }
      });
@@ -71,4 +71,3 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 		'Try again after deleting the contents of the store directory '+store_path);
 	}
 });
-
