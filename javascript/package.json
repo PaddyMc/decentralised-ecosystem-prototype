@@ -7,9 +7,10 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
+        "body-parser": "^1.18.2",
+        "express": "3.x",
         "fabric-ca-client": "^1.0.1",
-        "fabric-client": "^1.0.1",
-        "express": "3.x"
+        "fabric-client": "^1.0.1"
     },
     "author": "Patches & Cael",
     "license": "Apache-2.0",
