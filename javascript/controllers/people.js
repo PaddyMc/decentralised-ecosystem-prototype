@@ -10,6 +10,12 @@ var os = require('os');
 
 var store_path = path.join(__dirname, '../hfc-key-store');
 
+function CarCount(){
+	this.count = 9
+}
+
+var carCount = new CarCount()
+
 exports.addPerson = function(req, res) {
 		console.log('receiving data...');
 
@@ -52,11 +58,14 @@ exports.addPerson = function(req, res) {
 			console.log("Assigning transaction_id: ", tx_id._transaction_id);
 
 			var person = req.body;
+			carCount.count++;
+			var carString = "CAR"+carCount.count;
+			console.log(carString);
 			var request = {
 				//targets: let default to the peer assigned to the client
 				chaincodeId: 'fabcar',
-				fcn: 'changeCarOwner',
-				args: [person.name, person.image],
+				fcn: 'createCar',
+				args: [carString, person.name, "ha", "ha", person.image],
 				chainId: 'mychannel',
 				txId: tx_id
 			};
