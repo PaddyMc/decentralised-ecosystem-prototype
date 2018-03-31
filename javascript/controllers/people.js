@@ -10,11 +10,11 @@ var os = require('os');
 
 var store_path = path.join(__dirname, '../hfc-key-store');
 
-function CarCount(){
-	this.count = 9
+function MedicalRecordCount(){
+	this.count = 2
 }
 
-var carCount = new CarCount()
+var medicalRecordCount = new MedicalRecordCount()
 
 exports.addPerson = function(req, res) {
 		console.log('receiving data...');
@@ -58,14 +58,14 @@ exports.addPerson = function(req, res) {
 			console.log("Assigning transaction_id: ", tx_id._transaction_id);
 
 			var person = req.body;
-			carCount.count++;
-			var carString = "CAR"+carCount.count;
-			console.log(carString);
+			medicalRecordCount.count++;
+			var medicalRecordString = "MedicalRecord"+medicalRecordCount.count;
+			console.log(medicalRecordString);
 			var request = {
 				//targets: let default to the peer assigned to the client
-				chaincodeId: 'fabcar',
-				fcn: 'createCar',
-				args: [carString, person.name, "ha", "ha", person.image],
+				chaincodeId: 'medicalLedger',
+				fcn: 'createMedicalRecord',
+				args: [medicalRecordString, person.name, "person.image", person.record],
 				chainId: 'mychannel',
 				txId: tx_id
 			};
@@ -190,12 +190,12 @@ exports.findByQuery = function(req, res) {
 			throw new Error('Failed to get user1.... run registerUser.js');
 		}
 
-		// queryCar chaincode function - requires 1 argument, ex: args: ['CAR4'],
-		// queryAllCars chaincode function - requires no arguments , ex: args: [''],
+		// queryMedicalRecord chaincode function - requires 1 argument, ex: args: ['MedicalRecord4'],
+		// queryAllMedicalRecords chaincode function - requires no arguments , ex: args: [''],
 		const request = {
 			//targets : --- letting this default to the peers assigned to the channel
-			chaincodeId: 'fabcar',
-			fcn: 'queryCar',
+			chaincodeId: 'medicalLedger',
+			fcn: 'queryMedicalRecord',
 			args: [req.params.query.toString()]
 		};
 		return channel.queryByChaincode(request);
@@ -208,9 +208,9 @@ exports.findByQuery = function(req, res) {
 			} else {
 
 				var jsonData = JSON.parse(query_responses[0].toString());
-				res.send([jsonData.owner]);
+				res.send([jsonData.name]);
 
-				let base64String = jsonData.owner;
+				let base64String = jsonData.image;
 				let base64Image = base64String.split(';base64,').pop();
 
 				var fs = require('fs');
@@ -252,12 +252,12 @@ exports.findAll = function(req, res) {
 			throw new Error('Failed to get user1.... run registerUser.js');
 		}
 
-		// queryCar chaincode function - requires 1 argument, ex: args: ['CAR4'],
-		// queryAllCars chaincode function - requires no arguments , ex: args: [''],
+		// queryMedicalRecord chaincode function - requires 1 argument, ex: args: ['MedicalRecord4'],
+		// queryAllMedicalRecords chaincode function - requires no arguments , ex: args: [''],
 		const request = {
 			//targets : --- letting this default to the peers assigned to the channel
-			chaincodeId: 'fabcar',
-			fcn: 'queryAllCars',
+			chaincodeId: 'medicalLedger',
+			fcn: 'queryAllMedicalRecords',
 			args: ['']
 		};
 		return channel.queryByChaincode(request);
