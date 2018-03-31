@@ -13,8 +13,9 @@ var options = {
   uri: 'http://localhost:3001/people/addPerson',
   method: 'POST',
   json: {
-    "name": "CAR28",
-    "image": image
+    "name": "Kingston",
+    "image": image,
+    "record": "Blunt Trauma"
   }
 };
 
