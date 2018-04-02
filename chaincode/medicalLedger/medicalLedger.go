@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"strconv"
+	// "strconv"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	sc "github.com/hyperledger/fabric/protos/peer"
@@ -58,14 +58,13 @@ func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Respo
 		MedicalRecord{Name: "Patches", Image: "pppppppppp", Record: "Smallpox"},
 	}
 
-	i := 0
-	for i < len(medicalRecords) {
-		fmt.Println("i is ", i)
-		medicalRecordAsBytes, _ := json.Marshal(medicalRecords[i])
-		APIstub.PutState("MedicalRecord"+strconv.Itoa(i), medicalRecordAsBytes)
-		fmt.Println("Added", medicalRecords[i])
-		i = i + 1
-	}
+	medicalRecordAsBytes, _ := json.Marshal(medicalRecords[0])
+	APIstub.PutState("Cael", medicalRecordAsBytes)
+	fmt.Println("Added", medicalRecords[0])
+
+	medicalRecordAsBytes, _ = json.Marshal(medicalRecords[1])
+	APIstub.PutState("Patches", medicalRecordAsBytes)
+	fmt.Println("Added", medicalRecords[1])
 
 	return shim.Success(nil)
 }

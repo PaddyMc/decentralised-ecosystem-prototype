@@ -9,12 +9,6 @@ var os = require('os');
 
 var store_path = path.join(__dirname, '../hfc-key-store');
 
-function MedicalRecordCount(){
-	this.count = 2
-}
-
-var medicalRecordCount = new MedicalRecordCount()
-
 exports.addPerson = function(req, res) {
 		console.log('receiving data...');
 
@@ -57,14 +51,12 @@ exports.addPerson = function(req, res) {
 			console.log("Assigning transaction_id: ", tx_id._transaction_id);
 
 			var person = req.body;
-			var medicalRecordString = "MedicalRecord"+medicalRecordCount.count;
-			medicalRecordCount.count++;
 			console.log(medicalRecordString);
 			var request = {
 				//targets: let default to the peer assigned to the client
 				chaincodeId: 'medicalLedger',
 				fcn: 'addMedicalRecord',
-				args: [medicalRecordString, person.name, person.image, person.record],
+				args: [person.key, person.name, person.image, person.record],
 				chainId: 'mychannel',
 				txId: tx_id
 			};
@@ -352,7 +344,7 @@ exports.findByQuery = function(req, res) {
 			} else {
 
 				var jsonData = JSON.parse(query_responses[0].toString());
-				res.send([jsonData.name]);
+				res.send([jsonData.image]);
 
 				let base64String = jsonData.image;
 				let base64Image = base64String.split(';base64,').pop();
