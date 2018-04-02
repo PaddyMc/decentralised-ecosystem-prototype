@@ -39,8 +39,8 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	const request = {
 		//targets : --- letting this default to the peers assigned to the channel
 		chaincodeId: 'medicalLedger',
-		fcn: 'queryAllMedicalRecords',
-		args: ['']
+		fcn: 'getMedicalRecord',
+		args: ['Patches']
 	};
 	return channel.queryByChaincode(request);
 }).then((query_responses) => {
