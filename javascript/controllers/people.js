@@ -51,7 +51,6 @@ exports.addPerson = function(req, res) {
 			console.log("Assigning transaction_id: ", tx_id._transaction_id);
 
 			var person = req.body;
-			console.log(medicalRecordString);
 			var request = {
 				//targets: let default to the peer assigned to the client
 				chaincodeId: 'medicalLedger',
