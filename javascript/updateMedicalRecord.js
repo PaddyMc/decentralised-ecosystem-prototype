@@ -6,7 +6,7 @@ var options = {
   uri: 'http://localhost:3001/people/updateRecord',
   method: 'POST',
   json: {
-    "key": "MedicalRecord3",
+    "key": "Cael",
     "record": "The Black Lung"
   }
 };

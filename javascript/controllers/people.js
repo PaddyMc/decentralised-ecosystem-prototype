@@ -299,7 +299,7 @@ exports.updateRecord = function(req, res) {
 		});
 };
 
-exports.findByQuery = function(req, res) {
+exports.findImage = function(req, res) {
 	console.log(req.params.query)
 	var fabric_client = new Fabric_Client();
 	var channel = fabric_client.newChannel('mychannel');
@@ -346,13 +346,13 @@ exports.findByQuery = function(req, res) {
 				var jsonData = JSON.parse(query_responses[0].toString());
 				res.send([jsonData.image]);
 
-				let base64String = jsonData.image;
-				let base64Image = base64String.split(';base64,').pop();
-
-				var fs = require('fs');
-				fs.writeFile('decodedImage.png', base64Image, {encoding: 'base64'}, function(err) {
-				    console.log('File created');
-				});
+				// let base64String = jsonData.image;
+				// let base64Image = base64String.split(';base64,').pop();
+				//
+				// var fs = require('fs');
+				// fs.writeFile('decodedImage.png', base64Image, {encoding: 'base64'}, function(err) {
+				//     console.log('File created');
+				// });
 			}
 		} else {
 			console.log("No payloads were returned from query");
@@ -362,7 +362,8 @@ exports.findByQuery = function(req, res) {
 	});
 };
 
-exports.findAll = function(req, res) {
+exports.findRecord = function(req, res) {
+	console.log(req.params.query)
 	var fabric_client = new Fabric_Client();
 	var channel = fabric_client.newChannel('mychannel');
 	var peer = fabric_client.newPeer('grpc://localhost:7051');
@@ -393,8 +394,8 @@ exports.findAll = function(req, res) {
 		const request = {
 			//targets : --- letting this default to the peers assigned to the channel
 			chaincodeId: 'medicalLedger',
-			fcn: 'queryAllMedicalRecords',
-			args: ['']
+			fcn: 'getMedicalRecord',
+			args: [req.params.query.toString()]
 		};
 		return channel.queryByChaincode(request);
 	}).then((query_responses) => {
@@ -404,8 +405,9 @@ exports.findAll = function(req, res) {
 			if (query_responses[0] instanceof Error) {
 				console.error("error from query = ", query_responses[0]);
 			} else {
-				res.send([query_responses[0].toString()]);
-				console.log("Response is ", query_responses[0].toString());
+
+				var jsonData = JSON.parse(query_responses[0].toString());
+				res.send([jsonData.record]);
 			}
 		} else {
 			console.log("No payloads were returned from query");
