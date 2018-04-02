@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
-	// "strconv"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	sc "github.com/hyperledger/fabric/protos/peer"
@@ -33,8 +31,6 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 		return s.initLedger(APIstub)
 	} else if function == "addMedicalRecord" {
 		return s.addMedicalRecord(APIstub, args)
-	} else if function == "queryAllMedicalRecords" {
-		return s.queryAllMedicalRecords(APIstub)
 	} else if function == "updateMedicalRecord" {
 		return s.updateMedicalRecord(APIstub, args)
 	}
@@ -81,46 +77,6 @@ func (s *SmartContract) addMedicalRecord(APIstub shim.ChaincodeStubInterface, ar
 	APIstub.PutState(args[0], medicalRecordAsBytes)
 
 	return shim.Success(nil)
-}
-
-func (s *SmartContract) queryAllMedicalRecords(APIstub shim.ChaincodeStubInterface) sc.Response {
-
-	startKey := "MedicalRecord0"
-	endKey := "MedicalRecord999"
-
-	resultsIterator, err := APIstub.GetStateByRange(startKey, endKey)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
-	defer resultsIterator.Close()
-
-	var buffer bytes.Buffer
-	buffer.WriteString("[")
-
-	bArrayMemberAlreadyWritten := false
-	for resultsIterator.HasNext() {
-		queryResponse, err := resultsIterator.Next()
-		if err != nil {
-			return shim.Error(err.Error())
-		}
-		if bArrayMemberAlreadyWritten == true {
-			buffer.WriteString(",")
-		}
-		buffer.WriteString("{\"Key\":")
-		buffer.WriteString("\"")
-		buffer.WriteString(queryResponse.Key)
-		buffer.WriteString("\"")
-
-		buffer.WriteString(", \"Record\":")
-		buffer.WriteString(string(queryResponse.Value))
-		buffer.WriteString("}")
-		bArrayMemberAlreadyWritten = true
-	}
-	buffer.WriteString("]")
-
-	fmt.Printf("- queryAllMedicalRecords:\n%s\n", buffer.String())
-
-	return shim.Success(buffer.Bytes())
 }
 
 func (s *SmartContract) updateMedicalRecord(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
