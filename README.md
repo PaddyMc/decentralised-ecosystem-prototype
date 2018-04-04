@@ -20,7 +20,10 @@
         <li>node registerUser.js</li>
         <li>node server.js</li>
     </ul>
-<p>URL: http://localhost:3001/people</p>
+<p>URL: http://localhost:3001/people/updateRecord</p>
+<p>URL: http://localhost:3001/people/addPerson</p>
+<p>URL: http://localhost:3001/image/:query</p>
+<p>URL: http://localhost:3001/record/:query</p>
 <h1>To exit</h1>
 <p>Navigate to the /basic-network folder with CLI</p>
   <p>Run commands:</p>
