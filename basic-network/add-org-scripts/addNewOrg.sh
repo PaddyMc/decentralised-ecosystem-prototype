@@ -12,3 +12,7 @@
 #peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go/
 
 #peer chaincode query -C $CHANNEL_NAME -n mycc -c '{"Args":["query","a"]}'
+
+#create a new version of chaincode with endocerment policy to include Org3
+
+#update the chaincode on all peers
