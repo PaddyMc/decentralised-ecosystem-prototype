@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo
+echo "========== Starting ipfs filesys =========="
+
 initIPFS(){
 	for i in peer0.org1.example.com peer1.org1.example.com peer0.org2.example.com peer1.org2.example.com; do
 		docker exec "$i" ipfs init
