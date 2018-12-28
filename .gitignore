@@ -1,0 +1,5 @@
+bin/
+basic-network/channel-artifacts/
+basic-network/crypto-config/
+javascript/hfc-key-store/
+javascript/node_modules/

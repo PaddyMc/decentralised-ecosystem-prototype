@@ -1,22 +1,32 @@
 {
-    "name": "identity",
-    "version": "1.0.0",
-    "description": "Hyperledger Face Identity Application",
-    "main": "server.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-        "body-parser": "^1.18.2",
-        "express": "3.x",
-        "fabric-ca-client": "^1.0.1",
-        "fabric-client": "^1.0.1"
-    },
-    "author": "Patches & Cael",
-    "license": "Apache-2.0",
-    "keywords": [
-        "Hyperledger",
-        "Fabric",
-        "Application"
-    ]
+  "name": "decentralised-ecosystem-prototype",
+  "version": "1.0.0",
+  "description": "Hyperledger Face Identity Application",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "fabric-ca-client": "^1.3.0",
+    "fabric-client": "^1.3.0",
+    "fs": "0.0.1-security",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
+    "request": "^2.88.0",
+    "util": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaddyMc/decentralised-ecosystem-prototype.git"
+  },
+  "author": "Patches & Cael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaddyMc/decentralised-ecosystem-prototype/issues"
+  },
+  "homepage": "https://github.com/PaddyMc/decentralised-ecosystem-prototype#readme"
 }
