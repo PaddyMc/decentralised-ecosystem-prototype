@@ -1,7 +1,7 @@
 {
   "name": "decentralised-ecosystem-prototype",
   "version": "1.0.0",
-  "description": "",
+  "description": "Hyperledger Face Identity Application",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -16,13 +16,14 @@
   },
   "devDependencies": {},
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PaddyMc/decentralised-ecosystem-prototype.git"
   },
-  "author": "Cael Rowley",
+  "author": "Patches & Cael",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/PaddyMc/decentralised-ecosystem-prototype/issues"
